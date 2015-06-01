@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api batchcomplete="">
+	<continue blcontinue="0|208073" continue="-||" />
+	<query>
+		<backlinks>
+			<bl pageid="23501" ns="0" title="Georges Carpentier" />
+			<bl pageid="27483" ns="0" title="Coupe du monde de rugby à XV" />
+			<bl pageid="35528" ns="0" title="Coupe du monde de rugby à XV 2003" />
+			<bl pageid="36874" ns="0" title="Flower of Scotland" />
+			<bl pageid="52032" ns="0" title="Bernard Laporte" />
+			<bl pageid="62014" ns="0" title="Stade de France" />
+			<bl pageid="63242" ns="0" title="Tournoi des Six Nations" />
+			<bl pageid="78883" ns="0" title="Coupe d'Europe de rugby à XV" />
+			<bl pageid="90602" ns="0" title="Fernand Bouisson" />
+			<bl pageid="91986" ns="0" title="Rugby à XV" />
+			<bl pageid="102542" ns="0" title="Rugby à sept" />
+			<bl pageid="103159" ns="0" title="Centre national du rugby" />
+			<bl pageid="105180" ns="0" title="Marc Cécillon" />
+			<bl pageid="107793" ns="0" title="Jacques Rogge" />
+			<bl pageid="131827" ns="0" title="ASM Clermont Auvergne" />
+			<bl pageid="138407" ns="0" title="Jean-Baptiste Charcot" />
+			<bl pageid="140434" ns="0" title="Rugby-fauteuil" />
+			<bl pageid="143017" ns="0" title="Patrick Sébastien" />
+			<bl pageid="145702" ns="0" title="Équipe de Nouvelle-Zélande de rugby à XV" />
+			<bl pageid="145710" ns="0" title="Équipe d'Australie de rugby à XV" />
+			<bl pageid="148742" ns="0" title="Serge Blanco" />
+			<bl pageid="148958" ns="0" title="Millennium Stadium" />
+			<bl pageid="154322" ns="0" title="Olympique de Paris" />
+			<bl pageid="154383" ns="0" title="Championnat de France de rugby à XV" />
+			<bl pageid="163223" ns="0" title="Philippe Sella" />
+			<bl pageid="167144" ns="0" title="Challenge Yves du Manoir" />
+			<bl pageid="169042" ns="0" title="Haka" />
+			<bl pageid="177677" ns="0" title="Frederik van Zyl Slabbert" />
+			<bl pageid="182030" ns="0" title="Bouclier de Brennus" />
+			<bl pageid="184260" ns="0" title="Fernand Cazenave" />
+			<bl pageid="185580" ns="0" title="Coupe d'Europe de rugby à XV 2004-2005" />
+			<bl pageid="185612" ns="0" title="Bouclier européen de rugby à XV" />
+			<bl pageid="185616" ns="0" title="Challenge européen de rugby à XV" />
+			<bl pageid="186171" ns="0" title="Stade toulousain" />
+			<bl pageid="186179" ns="0" title="Championnat d'Angleterre de rugby à XV" />
+			<bl pageid="186184" ns="0" title="Stade français Paris rugby" />
+			<bl pageid="186487" ns="0" title="Biarritz olympique Pays basque" />
+			<bl pageid="186496" ns="0" title="Club sportif Bourgoin-Jallieu rugby" />
+			<bl pageid="186500" ns="0" title="Section paloise (rugby à XV)" />
+			<bl pageid="186510" ns="0" title="Club athlétique Brive Corrèze Limousin" />
+			<bl pageid="186518" ns="0" title="Football club Auch Gers" />
+			<bl pageid="186521" ns="0" title="Aviron bayonnais rugby pro" />
+			<bl pageid="186543" ns="0" title="Union sportive arlequins perpignanais" />
+			<bl pageid="186555" ns="0" title="Castres olympique" />
+			<bl pageid="186569" ns="0" title="Sporting union Agen Lot-et-Garonne" />
+			<bl pageid="186570" ns="0" title="Association sportive de Béziers Hérault" />
+			<bl pageid="186589" ns="0" title="Football Club de Grenoble rugby" />
+			<bl pageid="186595" ns="0" title="Montpellier Hérault rugby" />
+			<bl pageid="186608" ns="0"
+				title="Championnat de France de rugby à XV de 2e division" />
+			<bl pageid="186615" ns="0" title="Rugby club toulonnais" />
+			<bl pageid="186645" ns="0" title="Union sportive montalbanaise" />
+			<bl pageid="186649" ns="0" title="Stade montois (rugby à XV)" />
+			<bl pageid="186654" ns="0" title="Lyon olympique universitaire" />
+			<bl pageid="186663" ns="0" title="Union sportive dacquoise" />
+			<bl pageid="186673" ns="0" title="Northampton Saints" />
+			<bl pageid="186679" ns="0" title="Newcastle Falcons" />
+			<bl pageid="186684" ns="0" title="Leicester Tigers" />
+			<bl pageid="186686" ns="0" title="Sale Sharks" />
+			<bl pageid="186691" ns="0" title="Leeds Carnegie" />
+			<bl pageid="186695" ns="0" title="Worcester Warriors" />
+			<bl pageid="186698" ns="0" title="Bath Rugby" />
+			<bl pageid="186701" ns="0" title="London Wasps" />
+			<bl pageid="186707" ns="0" title="Harlequins" />
+			<bl pageid="186709" ns="0" title="Gloucester Rugby Football Club" />
+			<bl pageid="186711" ns="0" title="London Irish" />
+			<bl pageid="186717" ns="0" title="Saracens" />
+			<bl pageid="186728" ns="0" title="Pro12" />
+			<bl pageid="186819" ns="0" title="Coupe d'Europe de rugby à XV 2003-2004" />
+			<bl pageid="186835" ns="0" title="Coupe d'Europe de rugby à XV 1995-1996" />
+			<bl pageid="187188" ns="0" title="Leinster Rugby" />
+			<bl pageid="187194" ns="0" title="Munster Rugby" />
+			<bl pageid="187196" ns="0" title="Connacht Rugby" />
+			<bl pageid="187204" ns="0" title="Ulster Rugby" />
+			<bl pageid="187218" ns="0" title="Cardiff Blues" />
+			<bl pageid="187227" ns="0" title="Llanelli Scarlets" />
+			<bl pageid="187229" ns="0" title="Ospreys" />
+			<bl pageid="187233" ns="0" title="Newport Gwent Dragons" />
+			<bl pageid="187248" ns="0" title="Edinburgh Rugby" />
+			<bl pageid="187252" ns="0" title="Glasgow Warriors" />
+			<bl pageid="187258" ns="0" title="Border Reivers" />
+			<bl pageid="187303" ns="0" title="Équipe de France de rugby à XV" />
+			<bl pageid="187426" ns="0" title="Colomiers rugby" />
+			<bl pageid="187434" ns="0" title="Football club lourdais XV Hautes-Pyrénées" />
+			<bl pageid="187450" ns="0" title="Équipe d'Angleterre de rugby à XV" />
+			<bl pageid="187457" ns="0" title="Équipe d'Écosse de rugby à XV" />
+			<bl pageid="187464" ns="0" title="Équipe d'Irlande de rugby à XV" />
+			<bl pageid="187468" ns="0" title="Équipe du pays de Galles de rugby à XV" />
+			<bl pageid="187471" ns="0" title="Équipe d'Italie de rugby à XV" />
+			<bl pageid="187496" ns="0" title="Coupe du monde de rugby à XV 2007" />
+			<bl pageid="188161" ns="0" title="Stade de Twickenham" />
+			<bl pageid="188170" ns="0" title="Tournoi des Six Nations 2004" />
+			<bl pageid="188184" ns="0" title="Tournoi des Six Nations 2005" />
+			<bl pageid="190627" ns="0"
+				title="Rugby à XV aux Jeux olympiques d'été de 1900" />
+			<bl pageid="190642" ns="0"
+				title="Rugby à XV aux Jeux olympiques d'été de 1908" />
+			<bl pageid="198271" ns="0" title="Olivier Magne" />
+			<bl pageid="205875" ns="0" title="Jason Robinson" />
+			<bl pageid="205883" ns="0" title="Dimitri Yachvili" />
+			<bl pageid="205891" ns="0" title="Serge Betsen" />
+			<bl pageid="205916" ns="0" title="Jean Prat (rugby à XV)" />
+			<bl pageid="206066" ns="0" title="Yannick Jauzion" />
+		</backlinks>
+	</query>
+</api>

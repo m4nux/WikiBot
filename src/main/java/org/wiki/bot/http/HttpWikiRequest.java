@@ -31,10 +31,15 @@ public class HttpWikiRequest
    {
       this.proxyHost = proxyHost;
       this.proxyPort = proxyPort;
+
       this.httpClient = new DefaultHttpClient();
-      // HttpHost proxy = new HttpHost("localhost", 10000, "http");
-      HttpHost proxy = new HttpHost(this.proxyHost, this.proxyPort, "http");
-      this.httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+      
+      if (this.proxyHost!=null)
+      {
+         // HttpHost proxy = new HttpHost("localhost", 10000, "http");
+         HttpHost proxy = new HttpHost(this.proxyHost, this.proxyPort, "http");
+         this.httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+      }
       
    }
    

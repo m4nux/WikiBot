@@ -21,19 +21,23 @@ import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.wiki.bot.beans.WikiArticle;
 import org.wiki.bot.exceptions.WikiBotException;
 import org.wiki.bot.http.HttpWikiRequest;
 import org.wiki.bot.http.WPQuery;
 import org.wiki.bot.interfaces.IWikiBot;
+import org.wiki.bot.logs.Log;
 
 public class MediaWikiBotProxy implements IWikiBot
 {
+
+   public static Log LOG;
    
    public static int             CPT_DEPTH = 0;
    public static final Namespace ns        = Namespace.NO_NAMESPACE;
-
-   protected String proxyHost="";
-   protected int proxyPort=0;
+   
+   protected String              proxyHost;
+   protected int                 proxyPort;
    
    private MediaWikiBot          bot;
    
@@ -52,22 +56,22 @@ public class MediaWikiBotProxy implements IWikiBot
    {
       return proxyHost;
    }
-
+   
    public void setProxyHost(String proxyHost)
    {
       this.proxyHost = proxyHost;
    }
-
+   
    public int getProxyPort()
    {
       return proxyPort;
    }
-
+   
    public void setProxyPort(int proxyPort)
    {
       this.proxyPort = proxyPort;
    }
-
+   
    public MediaWikiBotProxy(String proxyHost, int proxyPort)
    {
       this.proxyHost = proxyHost;
@@ -86,14 +90,19 @@ public class MediaWikiBotProxy implements IWikiBot
    {
       this.bot.login(login, pass);
    }
-   
+
    public Article getArticle(String name)
    {
-      return this.bot.getArticle(name);
+      return this.bot.getArticle(name, 0);
+   }
+   
+   public Article getArticle(String name, int properties)
+   {
+      return this.bot.getArticle(name, properties);
    }
    
    @Override
-   public List<String> getBackLinksArticleNames(String articleName) throws WikiBotException
+   public List<WikiArticle> getBackLinksArticleNames(String articleName) throws WikiBotException
    {
       WPQuery wpquery = new WPQuery(proxyHost, proxyPort);
       wpquery.addParam("list", "backlinks");
@@ -102,7 +111,7 @@ public class MediaWikiBotProxy implements IWikiBot
       
       String xmlResponse = wpquery.executeRequest();
       Document doc;
-      List<String> returnArticleNamesList = new ArrayList<String>();
+      List<WikiArticle> returnArticleNamesList = new ArrayList<WikiArticle>();
       try
       {
          doc = new SAXBuilder().build(new StringReader(xmlResponse));
@@ -115,7 +124,7 @@ public class MediaWikiBotProxy implements IWikiBot
          while (itArticleNames.hasNext())
          {
             Element e = itArticleNames.next();
-            returnArticleNamesList.add(e.getName());
+            returnArticleNamesList.add(new WikiArticle(e.getName(), e.getName()));
          }
          
          return returnArticleNamesList;
@@ -136,9 +145,10 @@ public class MediaWikiBotProxy implements IWikiBot
    }
    
    @Override
-   public List<String> getArticleNamesFromPortal(String portal, int limit) throws WikiBotException
+   public List<WikiArticle> getArticleNamesFromPortal(String portal, int limit)
+            throws WikiBotException
    {
-
+      
       WPQuery wpquery = new WPQuery(proxyHost, proxyPort);
       wpquery.addParam("list", "backlinks");
       wpquery.addParam("bllimit", String.valueOf(limit));
@@ -148,7 +158,7 @@ public class MediaWikiBotProxy implements IWikiBot
       String xmlResponse = wpquery.executeRequest();
       
       Document doc;
-      List<String> returnArticleNamesList = new ArrayList<String>();
+      List<WikiArticle> returnArticleNamesList = new ArrayList<WikiArticle>();
       try
       {
          doc = new SAXBuilder().build(new StringReader(xmlResponse));
@@ -168,7 +178,7 @@ public class MediaWikiBotProxy implements IWikiBot
          while (itArticleNames.hasNext())
          {
             Element e = itArticleNames.next();
-            returnArticleNamesList.add(e.getName());
+            returnArticleNamesList.add(new WikiArticle(e.getName(), e.getName()));
          }
          
          return returnArticleNamesList;
@@ -189,8 +199,8 @@ public class MediaWikiBotProxy implements IWikiBot
    }
    
    @Override
-   public List<String> getArticleNamesFromCateg(String categ, String pageid, int limit, int depth)
-            throws WikiBotException
+   public List<WikiArticle> getArticleNamesFromCateg(String categ, String pageid, int limit,
+            int depth) throws WikiBotException
    {
       CPT_DEPTH++;
       WPQuery wpquery = new WPQuery(proxyHost, proxyPort);
@@ -207,7 +217,7 @@ public class MediaWikiBotProxy implements IWikiBot
       String xmlResponse = wpquery.executeRequest();
       
       Document doc;
-      List<String> returnArticleNamesList = new ArrayList<String>();
+      List<WikiArticle> returnArticleNamesList = new ArrayList<WikiArticle>();
       try
       {
          doc = new SAXBuilder().build(new StringReader(xmlResponse));
@@ -218,7 +228,7 @@ public class MediaWikiBotProxy implements IWikiBot
          format.setIndent("    ").setLineSeparator(System.getProperty("line.separator"));
          outputter.setFormat(format);
          String xmlCategMembersFormat = outputter.outputString(doc);
-         System.out.print(xmlCategMembersFormat);
+         //System.out.print(xmlCategMembersFormat);
          
          Element itemInfo = doc.getRootElement().getChild("query", ns)
                   .getChild("categorymembers", ns);
@@ -228,10 +238,13 @@ public class MediaWikiBotProxy implements IWikiBot
             Element e = itArticleNames.next();
             if (e.getAttribute("ns").getValue().equalsIgnoreCase("0"))
             {
-               returnArticleNamesList.add(e.getAttribute("title").getValue());
+               returnArticleNamesList.add(new WikiArticle(e.getAttribute("pageid").getValue(), e
+                        .getAttribute("title").getValue()));
             }
             else if (e.getAttribute("ns").getValue().equalsIgnoreCase("14"))
             {
+               LOG.info("Traitement de la sous-categorie " + e.getAttribute("title")
+                        .getValue());
                /* Il s'agit d'une sous catégorie */
                if (CPT_DEPTH <= depth)
                {
@@ -259,9 +272,9 @@ public class MediaWikiBotProxy implements IWikiBot
    }
    
    @Override
-   public Map<String, String> getUserContribs(String user, int limit) throws WikiBotException
+   public Map<String, WikiArticle> getUserContribs(String user, int limit) throws WikiBotException
    {
-
+      
       WPQuery wpquery = new WPQuery(proxyHost, proxyPort);
       wpquery.addParam("list", "usercontribs");
       wpquery.addParam("ucuser", user);
@@ -271,7 +284,7 @@ public class MediaWikiBotProxy implements IWikiBot
       String xmlResponse = wpquery.executeRequest();
       
       Document doc;
-      Map<String, String> returnArticleNamesList = new HashMap<String, String>();
+      Map<String, WikiArticle> returnArticleNamesList = new HashMap<String, WikiArticle>();
       try
       {
          doc = new SAXBuilder().build(new StringReader(xmlResponse));
@@ -290,7 +303,8 @@ public class MediaWikiBotProxy implements IWikiBot
          while (itArticleNames.hasNext())
          {
             Element e = itArticleNames.next();
-            returnArticleNamesList.put(e.getAttributeValue("pageid"), e.getAttributeValue("title"));
+            returnArticleNamesList.put(e.getAttributeValue("pageid"), new WikiArticle(e
+                     .getAttribute("pageid").getValue(), e.getAttribute("title").getValue()));
          }
          
          return returnArticleNamesList;
@@ -308,13 +322,13 @@ public class MediaWikiBotProxy implements IWikiBot
          throw new WikiBotException(e.getCause());
       }
    }
-
+   
    @Override
-   public boolean isAnArticle(String article) throws WikiBotException
+   public boolean isAnArticle(WikiArticle article) throws WikiBotException
    {
       WPQuery wpquery = new WPQuery(proxyHost, proxyPort);
       wpquery.addParam("indexpageids", "");
-      wpquery.addParam("titles", article);
+      wpquery.addParam("titles", article.getName());
       
       String xmlResponse = wpquery.executeRequest();
       Document doc;
@@ -326,10 +340,11 @@ public class MediaWikiBotProxy implements IWikiBot
          Format format = Format.getPrettyFormat();
          format.setIndent("    ").setLineSeparator(System.getProperty("line.separator"));
          outputter.setFormat(format);
-         String xmlUserContribs = outputter.outputString(doc);
-         System.out.print(xmlUserContribs);
+         //String xmlUserContribs = outputter.outputString(doc);
+         //System.out.print(xmlUserContribs);
          
-         Element itemInfo = doc.getRootElement().getChild("query", ns).getChild("pageids", ns).getChild("id", ns);
+         Element itemInfo = doc.getRootElement().getChild("query", ns).getChild("pageids", ns)
+                  .getChild("id", ns);
          return !itemInfo.getValue().equalsIgnoreCase("-1");
       }
       catch (JDOMException e)

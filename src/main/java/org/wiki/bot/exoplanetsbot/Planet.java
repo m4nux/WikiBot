@@ -1,5 +1,8 @@
 package org.wiki.bot.exoplanetsbot;
 
+import org.wiki.bot.util.Coordonnees;
+import org.wiki.bot.util.Utils;
+
 public class Planet
 {
    private String name;
@@ -81,8 +84,10 @@ public class Planet
    private String star_teff;
    private String star_detected_disc;
    private String star_magnetic_field;
-   
+
    private String wikiArticle;
+   private String erreurWiki;
+   private String erreurEPE;
    
    public Planet(String[] tab)
    {
@@ -149,8 +154,25 @@ public class Planet
       this.alternate_names = tab[60];
       this.molecules = tab[61];
       this.star_name = tab[62];
-      this.ra = tab[63];
-      this.dec = tab[64];
+      
+      if (tab[63].matches("[+-]*[0-9]+\\.[0-9]+"))
+      {
+         this.ra = tab[63]; /* ascencion droite */
+      } else
+      {
+         this.erreurEPE = tab[63] + " n'est pas une valeur AD valide";
+      }
+      if (tab[64].matches("[+-]*[0-9]+\\.[0-9]+"))
+      {
+         this.dec = tab[64]; /* declinaison */
+      } else
+      {
+         this.erreurEPE = tab[64] + " n'est pas une valeur AD valide";
+      }
+      /*
+      this.ra = Utils.decimal2Degrees(Double.valueOf(tab[63]));
+      this.dec = Utils.decimal2Degrees(Double.valueOf(tab[64]));
+      */
       /*
       this.mag_v = tab[65];
       this.mag_i = tab[66];
@@ -167,6 +189,11 @@ public class Planet
       this.star_detected_disc = tab[77];
       this.star_magnetic_field = tab[78];
       */
+   }
+
+   public Planet()
+   {
+      // TODO Auto-generated constructor stub
    }
 
    public String getWikiArticle()
@@ -967,6 +994,16 @@ public class Planet
    public void setStar_magnetic_field(String star_magnetic_field)
    {
       this.star_magnetic_field = star_magnetic_field;
+   }
+
+   public String getErreurWiki()
+   {
+      return erreurWiki;
+   }
+
+   public void setErreurWiki(String erreurWiki)
+   {
+      this.erreurWiki = erreurWiki;
    }
 
    @Override

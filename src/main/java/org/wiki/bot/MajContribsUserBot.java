@@ -6,6 +6,7 @@ import java.util.Map;
 import net.sourceforge.jwbf.core.contentRep.Article;
 
 import org.jdom2.Namespace;
+import org.wiki.bot.beans.WikiArticle;
 import org.wiki.bot.exceptions.WikiBotException;
 
 public class MajContribsUserBot extends MediaWikiBotProxy
@@ -22,14 +23,14 @@ public class MajContribsUserBot extends MediaWikiBotProxy
    private int getNbCategoryMembers(String titreCateg) throws WikiBotException
    {
       MediaWikiBotProxy.CPT_DEPTH=0;
-      List<String> listCateg = this.getArticleNamesFromCateg(titreCateg, null, 500, 0);
+      List<WikiArticle> listCateg = this.getArticleNamesFromCateg(titreCateg, null, 500, 0);
       System.out.println("Taille ListCateg:" + listCateg.size());
       return listCateg.size();
    }
    
    private int getNbArticlesFromPortals(String portal) throws WikiBotException
    {
-      List<String> listArticles = this.getArticleNamesFromPortal(portal, 100);
+      List<WikiArticle> listArticles = this.getArticleNamesFromPortal(portal, 100);
       System.out.println("Taille ListArticles:" + listArticles.size());
       System.out.println("Valeur ListArticles:" + listArticles.toString());
       return listArticles.size();
@@ -54,7 +55,7 @@ public class MajContribsUserBot extends MediaWikiBotProxy
    {
       MajContribsUserBot bot = new MajContribsUserBot();
       bot.login("Nanebiard", "manuxx");
-      Map<String, String> mapContribs = bot.getUserContribs("User:Nanebiard", 100);
+      Map<String, WikiArticle> mapContribs = bot.getUserContribs("User:Nanebiard", 100);
       Article userPage = bot.getArticle("Utilisateur:Nanebiard");
       String contenuPageUtilisateur = userPage.getText(); 
       System.out.println(contenuPageUtilisateur);

@@ -32,7 +32,6 @@ public class WPQuery extends HttpWikiRequest
    public String executeRequest()
    {
       this.buildRequest();
-      System.out.println("targetUrl:"+targetUrl);
       return super.executeRequest(targetUrl);
    }
    
